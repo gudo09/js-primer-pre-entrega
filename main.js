@@ -1,9 +1,35 @@
-let usuario
-let constraseña
+const usuario = "homerosimpsons"
+const contraseña = "lalolanda"
 
 let opcionMenu
-
+let accesoCorrecto = false
 let hambre = 50,sueño = 50,diversion = 50
+
+function loguearse(){
+  alert(`Su usuario es ${usuario} y su contraseña es ${contraseña}. Anótelos para recordarlos`);
+
+  let usuarioIngresado
+  let contraseñaIngresada
+
+  for (let i = 0; i < 3; i++) {
+    usuarioIngresado = prompt(`Ingrese su usuario: `);
+    contraseñaIngresada = prompt(`Ingrese su contraseña: `);
+
+    if (usuarioIngresado.toLowerCase() === usuario && contraseñaIngresada.toLowerCase() === contraseña) {
+      alert(`Bienvenido ${usuario} !!`);
+      accesoCorrecto = true;
+      break;
+    }else{
+      if (i === 2) {
+        alert(`Ya no le quedan intentos para ingresar. El programa se cerrará.`)
+        break;
+      }else{
+        alert(`Alguno de los datos ingresados no son correctos, le quedan ${3-1-i} intentos para ingresar.`)
+      }
+    }
+  }
+
+}
 
 function mostrarMenu() {
   return `  Seleccione una opción:
@@ -61,5 +87,8 @@ function menuPrincipal() {
   } while (opcionMenu !== 0);
 }
 
-
-menuPrincipal();
+loguearse();
+if (accesoCorrecto) { 
+  opcionMenu = prompt(mostrarMenu());
+  menuPrincipal();
+}
